@@ -4,11 +4,11 @@
   "description": "Nodejs API to handle shopify hooks",
   "main": "index.js",
   "scripts": {
-    "db:migrate": "node ./script/migrate",
-    "db:migrate-undo": "node ./script/migrateUndo",
-    "pretest": "NODE_ENV=test npm run db:migrate",
+    "db:create": "node ./script/db/create",
+    "db:drop": "node ./script/db/drop",
+    "pretest": "NODE_ENV=test npm run db:create",
     "test": "NODE_PATH=./ NODE_ENV=test mocha --timeout=10000",
-    "posttest": "NODE_ENV=test npm run db:migrate-undo",
+    "posttest": "NODE_ENV=test npm run db:drop",
     "dev": "nodemon --inspect",
     "start": "node index.js"
   },
@@ -24,8 +24,11 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "child-process-promise": "^2.2.1",
+    "dotenv-extended": "^2.0.2",
     "express": "^4.16.3",
+    "i": "^0.3.6",
     "mysql2": "^1.5.3",
+    "npm": "^6.1.0",
     "sequelize": "^4.38.0",
     "sequelize-cli": "^4.0.0"
   }
