@@ -7,5 +7,7 @@ const express = require('express'),
 app.use(bodyParser.json());
 cartRoute(app);
 
-app.listen(port);
+const server = app.listen(port);
 console.log('App is listening on PORT ' + port);
+
+module.exports = server;
