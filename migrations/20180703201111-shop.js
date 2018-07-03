@@ -1,25 +1,19 @@
 'use strict';
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('UserSessions', {
+    return queryInterface.createTable('Shops', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      firstName: {
+      domain: {
         type: Sequelize.STRING
       },
-      lastName: {
+      currency: {
         type: Sequelize.STRING
-      },
-      email: {
-        type: Sequelize.STRING
-      },
-      shopId: {
-        allowNull: true,
-        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -31,7 +25,8 @@ module.exports = {
       }
     });
   },
+
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('UserSessions');
+    return queryInterface.dropTable('Shops');
   }
 };

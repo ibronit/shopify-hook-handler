@@ -7,8 +7,8 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
-describe('User exists', function () {
-    models.User.all()
+describe('User session exists', function () {
+    models.UserSession.all()
         .then((user) => { console.log(user); })
         .finally(() => {
             models.sequelize.close();
@@ -22,7 +22,7 @@ describe('/POST cart', () => {
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
-                models.User.all().then((user) => { console.log(user); }).then(() => { models.sequelize.close(); });
+                models.UserSession.all().then((user) => { console.log(user); }).then(() => { models.sequelize.close(); });
                 done();
             });
     });

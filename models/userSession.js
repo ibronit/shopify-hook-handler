@@ -1,12 +1,12 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var User = sequelize.define('User', {
+  var UserSession = sequelize.define('UserSession', {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     email: DataTypes.STRING
   }, {});
-  User.associate = function(models) {
-    // associations can be defined here
+  UserSession.associate = function(models) {
+    UserSession.belongsTo(models.Shop)
   };
-  return User;
+  return UserSession;
 };
