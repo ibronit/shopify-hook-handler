@@ -1,15 +1,28 @@
 'use strict';
 
+const config = require('dotenv-extended').load();
+
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('UserSessions', [{
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkInsert('Shops', [{
+      domain: config.SHOP_DOMAIN,
+      currency: config.SHOP_DEFAULT_CURRENCY
+    }], {});
+
+    const shop = await queryInterface.sequelize.query(
+      `SELECT id from Shops;`
+    );
+
+    return await queryInterface.bulkInsert('UserSessions', [{
       firstName: 'John',
       lastName: 'Doe',
-      email: 'demo@demo.com'
+      email: 'demo@demo.com',
+      shopId: shop[0].id
     }], {});
   },
 
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('UserSessions', null, {});
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete('UserSessions', null, {});
+    await queryInterface.bulkDelete('Shops', null, {});
   }
 };
