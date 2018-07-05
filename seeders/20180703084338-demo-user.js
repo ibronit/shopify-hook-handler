@@ -6,7 +6,9 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('Shops', [{
       domain: config.SHOP_DOMAIN,
-      currency: config.SHOP_DEFAULT_CURRENCY
+      currency: config.SHOP_DEFAULT_CURRENCY,
+      createdAt: new Date(),
+      updatedAt: new Date()
     }], {});
 
     const shop = await queryInterface.sequelize.query(
@@ -17,7 +19,9 @@ module.exports = {
       firstName: 'John',
       lastName: 'Doe',
       email: 'demo@demo.com',
-      shopId: shop[0].id
+      shopId: shop[0].id,
+      createdAt: new Date(),
+      updatedAt: new Date()
     }], {});
   },
 
