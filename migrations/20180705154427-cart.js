@@ -4,8 +4,12 @@ module.exports = {
     return queryInterface.createTable('Carts', {
       id: {
         allowNull: false,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING(126),
+        primaryKey: true
+      },
+      token: {
+        allowNull: false,        
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

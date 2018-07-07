@@ -18,7 +18,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       cartId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING(126),
         foreignKey: true,
         allowNull: true,
         defaultValue: null,
