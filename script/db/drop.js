@@ -3,7 +3,7 @@ const { spawn } = require('child-process-promise');
 
 (async () => {
     try {
-        /* await spawn('./node_modules/.bin/sequelize', ['db:drop', `--env=${env}`]); */
+        await spawn('./node_modules/.bin/sequelize', ['db:drop', `--env=${env}`]);
         console.log(`${env} db dropped`);
     } catch (err) {        
         console.log('*************************');

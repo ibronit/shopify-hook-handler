@@ -1,3 +1,5 @@
+const cartHelper = require('../../models/helpers/cartHelper');
+
 const topicHeader = 'x-shopify-topic';
 
 const cartCreateTopic = 'carts/create';
@@ -15,11 +17,22 @@ exports.handleCartRequest = function (req, res) {
 }
 
 function createCart(req, res) {
-    console.log('create api called');
-    return res.json({ status: 200, message: 'Cart has been created' });
+    cartHelper.createByRequestBody(req.body)
+        .then(() => {
+            return res.json({ status: 200, message: 'Cart has been created' });
+        })
+        .catch(() => {
+            return res.json({ status: 500, message: 'Internal server error' });
+        });
 }
 
 function updateCart(req, res) {
-    console.log('update api called');
-    return res.json({ status: 200, message: 'Cart has been updated' });
+    cartHelper.updateByRequestBody(req.body)
+        .then(() => {
+            return res.json({ status: 200, message: 'Cart has been updated' });
+        })
+        .catch(() => {
+            return res.json({ status: 500, message: 'Internal server error' });
+        });
+    
 }
