@@ -13,7 +13,7 @@ exports.handleCartRequest = function (req, res) {
         case cartUpdateTopic:
             return updateCart(req, res);
     }
-    return res.json({ status: 404, message: `Can't handle topic ${topic}` });
+    return res.status(404).json({ status: 404, message: `Can't handle topic ${topic}` });
 }
 
 function createCart(req, res) {
@@ -21,8 +21,8 @@ function createCart(req, res) {
         .then(() => {
             return res.json({ status: 200, message: 'Cart has been created' });
         })
-        .catch(() => {
-            return res.json({ status: 500, message: 'Internal server error' });
+        .catch((err) => {            
+            return res.status(500).json({ status: 500, message: 'Internal server error' });
         });
 }
 
@@ -32,7 +32,7 @@ function updateCart(req, res) {
             return res.json({ status: 200, message: 'Cart has been updated' });
         })
         .catch(() => {
-            return res.json({ status: 500, message: 'Internal server error' });
+            return res.status(500).json({ status: 500, message: 'Internal server error' });
         });
-    
+
 }
