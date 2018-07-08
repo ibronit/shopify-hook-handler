@@ -4,23 +4,26 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../');
 const should = chai.should();
+const config = require('dotenv-extended').load();
 chai.use(chaiHttp);
 
 describe('Cart test', () => {
-    describe('User session exists', () => {
-        it('it should find users in the db', (done) => {
-            models.UserSession.all()
-                .then((users) => { users.should.be.a('Array') })
-                .finally(() => {
+    describe('/POST cart without topic', () => {
+        it('it should result 404 because of missing topic header', (done) => {
+            chai.request(server)
+                .post('/cart')
+                .end((err, res) => {                    
+                    chai.assert.equal(res.status, 404, "Response status is not 404");
+                    chai.assert.equal(res.body.status, 404, "Body's status is not 404")
+                    res.body.should.be.a('object');
                     done();
                 });
         });
-    });
 
-    describe('/POST cart without topic', () => {
-        it('it should result 404', (done) => {
+        it('it should result 404 because of missing domain header', (done) => {
             chai.request(server)
                 .post('/cart')
+                .set('x-shopify-topic', 'carts/create')
                 .end((err, res) => {                    
                     chai.assert.equal(res.status, 404, "Response status is not 404");
                     chai.assert.equal(res.body.status, 404, "Body's status is not 404")
@@ -34,6 +37,7 @@ describe('Cart test', () => {
                 .post('/cart')
                 .type('json')
                 .set('x-shopify-topic', 'carts/create')
+                .set('X-Shopify-Shop-Domain', config.SHOP_DOMAIN)
                 .send({
                     "id": "eeafa272cebfd4b22385bc4b645e762c",
                     "token": "eeafa272cebfd4b22385bc4b645e762c",
@@ -86,6 +90,7 @@ describe('Cart test', () => {
                 .post('/cart')
                 .type('json')
                 .set('x-shopify-topic', 'carts/update')
+                .set('X-Shopify-Shop-Domain', config.SHOP_DOMAIN)
                 .send({
                     "id": "eeafa272cebfd4b22385bc4b645e762c",
                     "token": "eeafa272cebfd4b22385bc4b645e762c",
