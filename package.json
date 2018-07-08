@@ -7,7 +7,7 @@
     "db:create": "node ./script/db/create",
     "db:drop": "node ./script/db/drop",
     "pretest": "NODE_ENV=test npm run db:create",
-    "test": "NODE_PATH=./ NODE_ENV=test mocha --timeout=10000",
+    "test": "NODE_PATH=./ NODE_ENV=test mocha --timeout=10000 || true",
     "posttest": "NODE_ENV=test npm run db:drop",
     "dev": "nodemon --inspect",
     "start": "node index.js"
