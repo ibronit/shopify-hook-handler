@@ -1,6 +1,6 @@
 # Shopify hook request handler app
 
-This is a demo hook handler app app written in nodejs.
+This is a demo hook handler app written in nodejs.
 It handles cart create and update hooks.
 
 ### Bootstrap the app
